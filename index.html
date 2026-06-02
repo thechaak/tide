@@ -411,14 +411,13 @@
                 <!-- Messages -->
                 <div id="btn-open-chats" class="bg-white rounded-[12px] shadow-sm overflow-hidden flex flex-col h-24 active:bg-gray-50 transition cursor-pointer">
                     <div class="flex-1 bg-[#dcf0ff] flex items-center justify-center">
-                        <svg viewBox="0 0 100 100" class="w-[52px] h-[52px]">
+                        <!-- FIX: Added explicit width and height attributes for iOS Safari -->
+                        <svg width="52" height="52" viewBox="0 0 100 100">
+                            <!-- Blue Circle -->
+                            <circle cx="45" cy="40" r="21" fill="#4f6dff" />
                             <!-- Green Chat Bubble -->
                             <circle cx="62" cy="58" r="21" fill="#b1f0c3" />
                             <polygon points="68,75 86,86 78,65" fill="#b1f0c3" />
-                            
-                            <!-- Blue Circle -->
-                            <circle cx="45" cy="40" r="21" fill="#4f6dff" />
-                            
                             <!-- Dark Navy Bars -->
                             <rect x="26" y="48" width="34" height="7.5" fill="#000080" />
                             <rect x="26" y="62" width="34" height="7.5" fill="#000080" />
@@ -432,7 +431,7 @@
                 <!-- Phone Support -->
                 <div class="bg-white rounded-[12px] shadow-sm overflow-hidden flex flex-col h-24 cursor-pointer active:bg-gray-50 transition">
                     <div class="flex-1 bg-[#eafffc] flex items-center justify-center">
-                         <svg viewBox="0 0 100 100" class="w-[50px] h-[50px]">
+                         <svg width="50" height="50" viewBox="0 0 100 100">
                             <!-- Pink block -->
                             <rect x="50" y="45" width="20" height="20" rx="4" fill="#ffd1da" />
                             <!-- Blue Phone -->
@@ -451,7 +450,7 @@
                 <!-- Report fraud -->
                 <div class="bg-white rounded-[12px] shadow-sm overflow-hidden flex flex-col h-24 cursor-pointer active:bg-gray-50 transition">
                     <div class="flex-1 bg-[#ffedef] flex items-center justify-center">
-                         <svg viewBox="0 0 100 100" class="w-[50px] h-[50px]">
+                         <svg width="50" height="50" viewBox="0 0 100 100">
                             <!-- Red Triangle -->
                             <polygon points="50,30 25,70 75,70" fill="#ff9e9a" />
                             <!-- Blue L shape -->
@@ -647,12 +646,13 @@
                     <div class="bg-white rounded-[20px] rounded-tl-sm p-4 text-[15.5px] leading-relaxed text-[#1a1a2e] shadow-sm w-[92%] border border-gray-100 mt-2">
                         <p class="mb-5">Hi Jai</p>
                         <p class="mb-5">We have completed a full review of your account and, regrettably, we are no longer able to offer you our services here at Tide. Therefore, we will be closing your account.</p>
-                        <p class="mb-5">Please be advised that the payments, within your Tide account, that have been paid to you from Intuit Limited, will be refunded back to the original payers.</p>
-                        <p class="mb-5">I'm afraid that it will be necessary to discuss this topic with your clients in order to arrange a different way to receive your funds.</p>
-                        <p class="mb-5">You can find more information for the reasons why we close accounts in our terms and conditions under section 33.</p>
-                        <p class="mb-5">Please note that this is not a live chat. We will respond as soon as possible.</p>
-                        <p>Kind regards,<br>
-                        Tide Team</p>
+                        <p class="mb-5">In regards to the remaining balance on your account, we're working to have this sent back to you.</p>
+                        <p class="mb-5">Please supply us with a valid nominated bank account by providing the following:</p>
+                        <p>Please attach an alternate nominated bank statement dated within the last 3 months to verify you are the account holder;<br>
+                        The sort code and account number need to be clearly visible on the document;<br>
+                        The nominated bank account needs to be in your name or the name of your company (if you are the only director in the company);<br>
+                        You must be the sole owner of the account. We cannot accept joint accounts;<br>
+                        We do not accept screenshots;</p>
                     </div>
 
                     <!-- Faint Kustomer watermark with arrow (Sticky to bottom of chat area) -->
@@ -707,10 +707,16 @@
             const convView = document.getElementById('conv-view');
             const btnCloseConv = document.getElementById('btn-close-conv');
 
+            // Meta tag for controlling the iOS status bar color
+            const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+
             btnOpenSupport.addEventListener('click', () => {
                 supportView.classList.remove('translate-x-full');
                 supportView.classList.add('translate-x-0');
                 bottomNav.classList.add('translate-y-full'); // Hide bottom nav
+                
+                // Change status bar to white to match Support header
+                themeColorMeta.setAttribute('content', '#ffffff');
             });
 
             // Close Support View
@@ -718,16 +724,25 @@
                 supportView.classList.remove('translate-x-0');
                 supportView.classList.add('translate-x-full');
                 bottomNav.classList.remove('translate-y-full'); // Show bottom nav
+                
+                // Revert status bar to Home background color
+                themeColorMeta.setAttribute('content', '#f4f5f9');
             });
 
             // Open Chats View (Slide up)
             btnOpenChats.addEventListener('click', () => {
                 chatsView.classList.remove('translate-y-full');
+                
+                // Change status bar to black for Chats view
+                themeColorMeta.setAttribute('content', '#000000');
             });
 
             // Close Chats View (Slide down)
             btnCloseChats.addEventListener('click', () => {
                 chatsView.classList.add('translate-y-full');
+                
+                // Revert status bar to white (since we are back on Support)
+                themeColorMeta.setAttribute('content', '#ffffff');
             });
 
             // Open Conversation View (Slide up over Chats)
@@ -738,6 +753,9 @@
                 if(!item.id) { 
                     item.addEventListener('click', () => {
                         convView.classList.remove('translate-y-full');
+                        
+                        // Status bar stays black
+                        themeColorMeta.setAttribute('content', '#000000');
                     });
                 }
             });
@@ -745,6 +763,9 @@
             // Close Conversation View (Slide down)
             btnCloseConv.addEventListener('click', () => {
                 convView.classList.add('translate-y-full');
+                
+                // Status bar stays black (since we are back on Chats)
+                themeColorMeta.setAttribute('content', '#000000');
             });
         });
     </script>
