@@ -409,9 +409,9 @@
             <!-- Bottom Contact Cards -->
             <div class="mt-6 mb-4 grid grid-cols-3 gap-3">
                 <!-- Messages -->
-                <button id="btn-open-chats" class="bg-white rounded-[12px] shadow-sm overflow-hidden flex flex-col h-24 active:bg-gray-50 transition text-left cursor-pointer">
-                    <div class="flex-1 bg-[#dcf0ff] relative flex items-center justify-center">
-                        <svg width="46" height="46" viewBox="0 0 100 100" class="absolute inset-0 w-full h-full">
+                <div id="btn-open-chats" class="bg-white rounded-[12px] shadow-sm overflow-hidden flex flex-col h-24 active:bg-gray-50 transition cursor-pointer">
+                    <div class="flex-1 bg-[#dcf0ff] flex items-center justify-center">
+                        <svg viewBox="0 0 100 100" class="w-[52px] h-[52px]">
                             <!-- Green Chat Bubble -->
                             <circle cx="62" cy="58" r="21" fill="#b1f0c3" />
                             <polygon points="68,75 86,86 78,65" fill="#b1f0c3" />
@@ -424,15 +424,15 @@
                             <rect x="26" y="62" width="34" height="7.5" fill="#000080" />
                         </svg>
                     </div>
-                    <div class="h-8 bg-white flex items-center justify-center">
+                    <div class="h-8 bg-white flex items-center justify-center border-t border-gray-50">
                         <span class="text-[12px] font-medium text-[#1a1a2e]">Messages</span>
                     </div>
-                </button>
+                </div>
 
                 <!-- Phone Support -->
-                <div class="bg-white rounded-[12px] shadow-sm overflow-hidden flex flex-col h-24">
-                    <div class="flex-1 bg-[#eafffc] relative flex items-center justify-center">
-                         <svg width="40" height="40" viewBox="0 0 100 100" class="absolute inset-0 w-full h-full">
+                <div class="bg-white rounded-[12px] shadow-sm overflow-hidden flex flex-col h-24 cursor-pointer active:bg-gray-50 transition">
+                    <div class="flex-1 bg-[#eafffc] flex items-center justify-center">
+                         <svg viewBox="0 0 100 100" class="w-[50px] h-[50px]">
                             <!-- Pink block -->
                             <rect x="50" y="45" width="20" height="20" rx="4" fill="#ffd1da" />
                             <!-- Blue Phone -->
@@ -443,15 +443,15 @@
                             <polyline points="51,65 54,68 60,62" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </div>
-                    <div class="h-8 bg-white flex items-center justify-center">
+                    <div class="h-8 bg-white flex items-center justify-center border-t border-gray-50">
                         <span class="text-[12px] font-medium text-[#1a1a2e]">Phone support</span>
                     </div>
                 </div>
 
                 <!-- Report fraud -->
-                <div class="bg-white rounded-[12px] shadow-sm overflow-hidden flex flex-col h-24">
-                    <div class="flex-1 bg-[#ffedef] relative flex items-center justify-center">
-                         <svg width="40" height="40" viewBox="0 0 100 100" class="absolute inset-0 w-full h-full">
+                <div class="bg-white rounded-[12px] shadow-sm overflow-hidden flex flex-col h-24 cursor-pointer active:bg-gray-50 transition">
+                    <div class="flex-1 bg-[#ffedef] flex items-center justify-center">
+                         <svg viewBox="0 0 100 100" class="w-[50px] h-[50px]">
                             <!-- Red Triangle -->
                             <polygon points="50,30 25,70 75,70" fill="#ff9e9a" />
                             <!-- Blue L shape -->
@@ -461,7 +461,7 @@
                             <rect x="48" y="22" width="4" height="12" fill="#ff706b" />
                         </svg>
                     </div>
-                    <div class="h-8 bg-white flex items-center justify-center">
+                    <div class="h-8 bg-white flex items-center justify-center border-t border-gray-50">
                         <span class="text-[12px] font-medium text-[#1a1a2e]">Report fraud</span>
                     </div>
                 </div>
