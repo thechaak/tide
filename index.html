@@ -35,6 +35,9 @@
         }
     </script>
     <style>
+        html, body {
+            transition: background-color 0.3s ease-out;
+        }
         body {
             background-color: #f4f5f9;
             /* Prevent bounce on iOS */
@@ -707,8 +710,16 @@
             const convView = document.getElementById('conv-view');
             const btnCloseConv = document.getElementById('btn-close-conv');
 
-            // Meta tag for controlling the iOS status bar color
+            // Meta tag and body background for controlling the iOS status bar color
             const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+            
+            const updateStatusBar = (color) => {
+                // For Safari browser
+                themeColorMeta.setAttribute('content', color);
+                // For iOS PWA Standalone Mode (crucial to change the physical top safe-area color)
+                document.documentElement.style.backgroundColor = color;
+                document.body.style.backgroundColor = color;
+            };
 
             btnOpenSupport.addEventListener('click', () => {
                 supportView.classList.remove('translate-x-full');
@@ -716,7 +727,7 @@
                 bottomNav.classList.add('translate-y-full'); // Hide bottom nav
                 
                 // Change status bar to white to match Support header
-                themeColorMeta.setAttribute('content', '#ffffff');
+                updateStatusBar('#ffffff');
             });
 
             // Close Support View
@@ -726,7 +737,7 @@
                 bottomNav.classList.remove('translate-y-full'); // Show bottom nav
                 
                 // Revert status bar to Home background color
-                themeColorMeta.setAttribute('content', '#f4f5f9');
+                updateStatusBar('#f4f5f9');
             });
 
             // Open Chats View (Slide up)
@@ -734,7 +745,7 @@
                 chatsView.classList.remove('translate-y-full');
                 
                 // Change status bar to black for Chats view
-                themeColorMeta.setAttribute('content', '#000000');
+                updateStatusBar('#000000');
             });
 
             // Close Chats View (Slide down)
@@ -742,7 +753,7 @@
                 chatsView.classList.add('translate-y-full');
                 
                 // Revert status bar to white (since we are back on Support)
-                themeColorMeta.setAttribute('content', '#ffffff');
+                updateStatusBar('#ffffff');
             });
 
             // Open Conversation View (Slide up over Chats)
@@ -755,7 +766,7 @@
                         convView.classList.remove('translate-y-full');
                         
                         // Status bar stays black
-                        themeColorMeta.setAttribute('content', '#000000');
+                        updateStatusBar('#000000');
                     });
                 }
             });
@@ -765,7 +776,7 @@
                 convView.classList.add('translate-y-full');
                 
                 // Status bar stays black (since we are back on Chats)
-                themeColorMeta.setAttribute('content', '#000000');
+                updateStatusBar('#000000');
             });
         });
     </script>
